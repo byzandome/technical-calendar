@@ -4,6 +4,6 @@
 	.calendar-grid {
 		@apply grid;
 		grid-template-columns: 100px 620px;
-		grid-template-rows: repeat(25, 70px);
+		grid-template-rows: repeat(25, 28.8px);
 	}
 }
