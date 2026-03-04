@@ -45,30 +45,23 @@ jobs:
         with:
           script: |
             const tag = `v${require('./package.json').version}`;
-            const { data: existingTag } = await github.rest.git.getRef({
+            const commitSha = context.sha;
+            
+            const tagData = await github.rest.git.createTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: `tags/${tag}`
+              tag: tag,
+              message: `Release ${tag}`,
+              object: commitSha,
+              type: 'commit'
             });
             
-            if (!existingTag) {
-              const commitSha = context.sha;
-              const tagData = await github.rest.git.createTag({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag: tag,
-                message: `Release ${tag}`,
-                object: commitSha,
-                type: 'commit'
-              });
-              
-              await github.rest.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: `refs/tags/${tag}`,
-                sha: commitSha
-              });
-            }
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tag}`,
+              sha: commitSha
+            });
             
             return tag;
         
