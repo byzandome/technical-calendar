@@ -3,24 +3,28 @@ import { cn } from "../utils/styles";
 import { useMemo } from "react";
 
 type HourProps = {
-  hour: Date;
+  date: Date;
 };
 
-export default function Hour({ hour }: HourProps) {
+const FORMAT_HOUR = "hh:mm";
+
+export default function Hour({ date: hour }: HourProps) {
   const isFullHour = useMemo(() => hour.getMinutes() === 0, [hour]);
   return (
-    <div className=" flex items-start justify-end absolute right-0 -top-3">
-      <div className="flex items-end gap-1">
+    <div className="flex items-center justify-center">
+      <div className="flex items-center gap-1">
         <span
-          className={cn("text-xs", {
-            "font-bold text-sm": isFullHour,
-            "text-gray-500": !isFullHour,
+          className={cn("text-sm leading-5", {
+            "font-bold ": isFullHour,
+            "text-gray-500 text-xs": !isFullHour,
           })}
         >
-          {format(hour, "hh:mm")}
+          {format(hour, FORMAT_HOUR)}
         </span>
         {isFullHour && (
-          <span className="text-[10px] text-gray-500">{format(hour, "a")}</span>
+          <span className="text-[10px] leading-5 text-gray-500">
+            {format(hour, "a")}
+          </span>
         )}
       </div>
     </div>
