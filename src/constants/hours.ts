@@ -7,12 +7,12 @@ export const MINUTES_PER_HOUR = 60;
 export const RANGE_HOUR_START = new Date().setHours(HOUR_START, 0, 0, 0);
 export const RANGE_HOUR_END = new Date().setHours(HOUR_END, 0, 0, 0);
 export const HOURS_STEPS = eachMinuteOfInterval(
-  {
-    end: RANGE_HOUR_END,
-    start: RANGE_HOUR_START,
-  },
-  {
-    step: 30,
-  },
+	{
+		end: RANGE_HOUR_END,
+		start: RANGE_HOUR_START,
+	},
+	{
+		step: 30,
+	},
 );
 export const STEPS_SECTIONS = HOURS_STEPS.length - 1;

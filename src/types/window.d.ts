@@ -1,7 +1,7 @@
 declare global {
-  interface Window {
-    layOutDay: (events: any[]) => void;
-  }
+	interface Window {
+		layOutDay: (events: any[]) => void;
+	}
 }
 
 export {};

@@ -1,15 +1,26 @@
 {
   "name": "technical-calendar",
-  "private": true,
+  "private": false,
+  "author": {
+    "email": "miguel@zandome.dev",
+    "name": "Miguel Mendoza"
+  },
+  "repository": {
+    "url": "https://github.com/byzandome/technical-calendar"
+  },
+  "readme": "https://github.com/byzandome/technical-calendar/README.md",
+  "engines": {
+    "node": ">18.0.0"
+  },
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "@biomejs/biome lint",
-    "lint:fix": "@biomejs/biome lint --write",
-    "format": "@biomejs/biome format",
-    "format:fix": "@biomejs/biome format --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format",
+    "format:fix": "biome format --write",
     "preview": "vite preview"
   },
   "dependencies": {
