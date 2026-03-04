@@ -15,3 +15,4 @@ export const HOURS_STEPS = eachMinuteOfInterval(
     step: 30,
   },
 );
+export const STEPS_SECTIONS = HOURS_STEPS.length - 1;

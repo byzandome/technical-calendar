@@ -4,7 +4,7 @@ import { dateToMinutes } from "./date";
 export function calculateEventLayout(events: EventCalendar[]): EventCalendar[] {
   if (events.length === 0) return [];
 
-  const eventMinutes = events
+  const eventWithMinutes = events
     .map((e) => ({
       ...e,
       startInMinutes: dateToMinutes(e.start),
@@ -15,13 +15,13 @@ export function calculateEventLayout(events: EventCalendar[]): EventCalendar[] {
   const result: EventCalendar[] = [];
   let groupStart = 0;
 
-  while (groupStart < eventMinutes.length) {
+  while (groupStart < eventWithMinutes.length) {
     const columns: number[] = [];
     const eventColumns: number[] = [];
-    const groupEvents: typeof eventMinutes = [];
+    const groupEvents: typeof eventWithMinutes = [];
 
-    for (let i = groupStart; i < eventMinutes.length; i++) {
-      const event = eventMinutes[i];
+    for (let i = groupStart; i < eventWithMinutes.length; i++) {
+      const event = eventWithMinutes[i];
 
       if (groupEvents.length > 0) {
         const groupEnd = Math.max(...groupEvents.map((e) => e.endInMinutes));
