@@ -1,73 +1,148 @@
-# React + TypeScript + Vite
+# Technical Calendar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Technical Test about calendar application built with React, TypeScript, and Vite, featuring Tailwind CSS for styling and Zustand for state management.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Modern Tech Stack**: React 19, TypeScript, Vite, Tailwind CSS
+- **State Management**: Zustand for efficient state handling
+- **Form Validation**: Zod for robust data validation
+- **Date Handling**: date-fns for date operations
+- **Component Utilities**: clsx and tailwind-merge for dynamic styling
 
-## React Compiler
+## Project Structure
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/          # Reusable UI components
+├── hooks/              # Custom React hooks
+├── stores/             # Zustand state stores
+├── types/              # TypeScript type definitions
+├── utils/              # Utility functions
+├── App.tsx             # Main application component
+└── main.tsx            # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## How It Works
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### State Management
+- Uses **Zustand** for lightweight state management
+- Centralized stores for calendar data, events, and UI state
+- Efficient re-renders with selective state subscriptions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Form Handling
+- **Zod** schemas for type-safe form validation
+- Client-side validation with real-time feedback
+- Type inference from validation schemas
+
+### Styling
+- **Tailwind CSS** for utility-first styling
+- Responsive design with mobile-first approach
+- Component composition with clsx and tailwind-merge
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/technical-calendar.git
+   cd technical-calendar
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
 ```
+
+- Open http://localhost:5173 in your browser
+
+### Building
+
+Create a production build:
+```bash
+npm run build
+```
+
+- Output in `dist/` directory
+
+### Preview Production Build
+
+Test the production build locally:
+```bash
+npm run preview
+```
+
+## Testing
+
+### Code Quality
+
+Run linting to check for code issues:
+```bash
+npm run lint
+```
+
+Fix linting issues automatically:
+```bash
+npm run lint:fix
+```
+
+### Formatting
+
+Format code according to project standards:
+```bash
+npm run format
+```
+
+Fix formatting issues automatically:
+```bash
+npm run format:fix
+```
+
+## Configuration Files
+
+- **package.json**: Project dependencies and scripts
+- **tsconfig.json**: TypeScript configuration
+- **vite.config.ts**: Vite build configuration
+- **biome.json**: Code formatting and linting rules
+- **tailwind.config.js**: Tailwind CSS configuration
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Tech Stack
+
+- **React**: 19.2.0 (UI library)
+- **TypeScript**: 5.9.3 (Type safety)
+- **Vite**: 7.3.1 (Build tool)
+- **Tailwind CSS**: 4.2.1 (Styling)
+- **Zustand**: 5.0.11 (State management)
+- **Zod**: 4.3.6 (Form validation)
+- **date-fns**: 4.1.0 (Date operations)
+- **Biome**: 2.4.5 (Code quality)
+
+## Browser Support
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- ES2020+ features with appropriate polyfills
+- Responsive design for mobile and desktop
+
+## Troubleshooting
+
+### Common Issues
+
+- **Port already in use**: Change port in vite.config.ts
+- **TypeScript errors**: Check tsconfig.json settings
+- **Build failures**: Ensure all dependencies are installed
