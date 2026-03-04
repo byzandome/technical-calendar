@@ -40,10 +40,45 @@ jobs:
 
       - name: Create release
         if: github.ref == 'refs/heads/main'
+        id: create_tag
+        uses: actions/github-script@v8.0.0
+        with:
+          script: |
+            const tag = `v${require('./package.json').version}`;
+            const { data: existingTag } = await github.rest.git.getRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `tags/${tag}`
+            });
+            
+            if (!existingTag) {
+              const commitSha = context.sha;
+              const tagData = await github.rest.git.createTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: tag,
+                message: `Release ${tag}`,
+                object: commitSha,
+                type: 'commit'
+              });
+              
+              await github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `refs/tags/${tag}`,
+                sha: commitSha
+              });
+            }
+            
+            return tag;
+        
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2.5.0
         with:
           files: dist.zip
           draft: false
           prerelease: false
+          overwrite_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
