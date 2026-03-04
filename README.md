@@ -40,6 +40,37 @@ src/
 - Responsive design with mobile-first approach
 - Component composition with clsx and tailwind-merge
 
+### Window Function
+- The application exposes a global `layOutDay` function via `window` object
+- This function accepts an array of event objects and renders them on the calendar
+- Useful for testing and external integrations
+
+### Event Structure
+Events must follow this structure:
+```typescript
+interface EventDatasource {
+  start: number;                   // Start date/time in minutes from 9:00 AM
+  end: number;                     // End date/time in minutes from 9:00 AM
+}
+```
+
+### Validations
+- **Date validation**: end must be after start
+
+### Usage Example
+```javascript
+window.layOutDay([
+  {
+    start: 230,
+    end: 340
+  },
+  {
+    start: 90,
+    end:130
+  }
+]);
+```
+
 ## Getting Started
 
 ### Prerequisites
