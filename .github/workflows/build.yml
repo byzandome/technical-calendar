@@ -37,33 +37,6 @@ jobs:
           name: dist-production
           path: dist.zip
           retention-days: 30
-
-      - name: Create release
-        if: github.ref == 'refs/heads/main'
-        id: create_tag
-        uses: actions/github-script@v8.0.0
-        with:
-          script: |
-            const tag = `v${require('./package.json').version}`;
-            const commitSha = context.sha;
-            
-            const tagData = await github.rest.git.createTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: tag,
-              message: `Release ${tag}`,
-              object: commitSha,
-              type: 'commit'
-            });
-            
-            await github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: `refs/tags/${tag}`,
-              sha: commitSha
-            });
-            
-            return tag;
         
       - name: Create GitHub Release
         if: github.ref == 'refs/heads/main'
